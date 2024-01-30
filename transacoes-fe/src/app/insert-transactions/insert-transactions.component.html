@@ -1,0 +1,29 @@
+<form action="" *ngIf="!isBulk">
+<input type="number" name="value" [(ngModel)]="value">
+<input type="string" name="category" [(ngModel)]="category">
+<input type="date" name="transactiondate" [(ngModel)]="transactiondate">
+<button (click)="insertTransaction()">insert</button>
+</form>
+
+<button (click)="bulkToglle()">  
+  <div *ngIf="!isBulk; else userLoggedOut">
+    Trocar para mode de inserção em massa
+  </div>
+  <ng-template #userLoggedOut>
+    Voltar para inserção unitaria
+  </ng-template>
+
+</button>
+
+
+<form action="" *ngIf="isBulk" >
+<div *ngFor="let transaction of bulkTransactionArray">
+  <input type="number" name="value" [(ngModel)]="transaction.value">
+  <input type="text" name="category" [(ngModel)]="transaction.category">
+  <input type="date" name="transactiondate" [(ngModel)]="transaction.transactiondate">
+
+</div>
+<button (click)="insertBulkOfTransactions()">Inserção em massa</button>
+
+  <button (click)="addNewFields()">Colocar mais 1 campo de inserção</button>
+</form>

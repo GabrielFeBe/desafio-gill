@@ -1,5 +1,6 @@
 package com.transacoes.transacoes.services;
 
+import com.transacoes.transacoes.dto.LoginDto;
 import com.transacoes.transacoes.entities.PersonEntity;
 import com.transacoes.transacoes.repositories.PersonRepository;
 import java.util.Optional;
@@ -25,4 +26,10 @@ public class PersonService {
     return this.personRepository.findById(id);
   }
 
+  public Integer loginPerson(LoginDto login) {
+    var person = this.personRepository.findByEmailAndPassword(login.email(), login.password())
+        .orElseThrow();
+    return person.getId();
+
+  }
 }

@@ -1,0 +1,10 @@
+<header>Cabeça
+  <nav>
+    <a routerLink="/register" *ngIf="!token">Registar</a>
+    <a routerLink="/login" *ngIf="!token">Login</a>
+    <a routerLink="/insert" *ngIf="token">Colocar gastos</a>
+    <a routerLink="/transactions" *ngIf="token">Gastos</a>
+  </nav>
+</header>
+<router-outlet></router-outlet>
+<footer>Pé</footer>
