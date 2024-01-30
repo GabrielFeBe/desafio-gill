@@ -236,8 +236,13 @@ O Desafio do Gill é uma aplicação que gerencia transações financeiras, perm
 <summary>Transactions</summary>
 
 - Tela que mostra todas as transações de uma pessoa especifica, nessa tela é possivel manipular as transações, segue o exemplo:
-<br>
-<img src="./transacoes-fe//src/assets/manipulatingTransactions.gif" alt="login" width="500"/>
+  <br>
+  <img src="./transacoes-fe//src/assets/manipulatingTransactions.gif" alt="login" width="500"/>
+
+- Ao Fazer filtrar transações por categorias o retorno é Double logo ele é exato, segue o exemplo:
+  <br>
+  <img src="./transacoes-fe//src/assets/doubleReturn.png" alt="login" width="500"/>
+
 </details>
 
 <details>
