@@ -21,6 +21,7 @@ export class TransactionsComponent implements OnInit {
   clicked = false;
   deleteField = false;
   confirmation = '';
+  filterNumber = 0;
   constructor(private router:Router, private cookies:CookieService, private service:TransactionService){
   
   }
@@ -53,6 +54,14 @@ export class TransactionsComponent implements OnInit {
       ()=>{})
     } else {
       alert("Você dele digitar DELETAR em cacha alta")
+    }
+  }
+
+  filterByNumber(){
+    if(!this.transactions.some((transaction)=> transaction.id === this.filterNumber)){
+      alert("Transação não encontrada")
+    } else{
+      this.transactions = this.transactions.filter((transacion) => transacion.id === this.filterNumber)
     }
   }
 

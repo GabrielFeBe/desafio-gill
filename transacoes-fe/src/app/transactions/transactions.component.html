@@ -3,12 +3,18 @@
 <div class="filter_section">
   <input type="text" name="category" [(ngModel)]="category">
   <button (click)="categoryFilter()">Ativar filtro de categoria</button>
-  <button (click)="cleaningFilters()" >Limpar Filtro de categoria</button>
+  <button (click)="cleaningFilters()" >Limpar Filtros</button>
   <p *ngIf="clicked" class="show">Valor Total gasto nessa categoria: {{valueOfFilteredTransactions}} </p>
 </div>
 
-<div class="delete_whole">
+<div class="filter">
+  <form action="">
+    <input type="number" name="numer_filter" [(ngModel)]="filterNumber">
+    <button (click)="filterByNumber()">Filter</button>
+  </form>
+</div>
 
+<div class="delete_whole">
 <button *ngIf="!deleteField; else deleteOf" (click)="showDeleteField()" class="first_button">Deletar tudo</button>
 <ng-template #deleteOf>
   Escreva DELETAR para confirmar

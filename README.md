@@ -243,6 +243,7 @@ O Desafio do Gill é uma aplicação que gerencia transações financeiras, perm
 - Dentro do arquivo `src/endpoint.ts` está a base url do backend, caso você mude a porta do backend, é necessário mudar a porta no arquivo `endpoint.ts` também.
 - O front end só funciona se o backend estiver rodando pois literalmente todas as requisições são feitas para o backend.
 - A maneira que é feito o login é muito básico eu simplesmente coloco o ID do usuario em um cookie chamado `security` e uso ele para fazer as requisiçõe, Irei mudar pra JWT assim que eu aprender a usar JWT em Java, fiquei com medo de mudar quebrar tudo e não conseguir arrumar a tempo.
+- O Filtro por Id da transação também poderia ser feito pelo BackEnd e esse end-point já existe, mas no nível da aplicação creio que apenas no FE tá melhor também posso estar errado sou leigo.
 
 #### Telas
 
