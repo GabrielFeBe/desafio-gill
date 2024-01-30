@@ -4,6 +4,7 @@ import com.transacoes.transacoes.dto.CreateTransactionDto;
 import com.transacoes.transacoes.entities.PersonEntity;
 import com.transacoes.transacoes.entities.TransactionEntity;
 import com.transacoes.transacoes.exceptions.PersonNotFound;
+import com.transacoes.transacoes.exceptions.TransactionNotFound;
 import com.transacoes.transacoes.repositories.PersonRepository;
 import com.transacoes.transacoes.repositories.TransactionRepository;
 import jakarta.transaction.Transactional;
@@ -76,5 +77,13 @@ public class TransactionService {
       value += transaction.getValue();
     }
     return value;
+  }
+
+  public TransactionEntity getById(Integer id) {
+    Optional<TransactionEntity> transaction = this.transactionRepository.findById(id);
+    if (transaction.isEmpty()) {
+      throw new TransactionNotFound();
+    }
+    return transaction.get();
   }
 }

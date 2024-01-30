@@ -26,13 +26,18 @@ public class TransactionController {
   @Autowired
   private TransactionService transactionService;
 
+  @GetMapping
+  public ResponseEntity<TransactionEntity> getTransactionById(@PathParam("id") Integer id) {
+    TransactionEntity transaction = this.transactionService.getById(id);
+    return ResponseEntity.status(200).body(transaction);
+  }
+
   @PutMapping
   public ResponseEntity updateTransaction(@PathParam("id") Integer id,
       @RequestBody CreateTransactionDto transaction) {
 
-
-      this.transactionService.updateTransaction(transaction.dtoToTransaction(), id);
-      return ResponseEntity.status(200).build();
+    this.transactionService.updateTransaction(transaction.dtoToTransaction(), id);
+    return ResponseEntity.status(200).build();
   }
 
   @PostMapping
@@ -62,7 +67,7 @@ public class TransactionController {
   }
 
   @DeleteMapping("all")
-  public void deleteTransactionsByPersonId(@PathParam("personid") Integer personid){
+  public void deleteTransactionsByPersonId(@PathParam("personid") Integer personid) {
     System.out.println(personid);
     this.transactionService.deleteTransactionByPerson(personid);
   }

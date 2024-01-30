@@ -104,6 +104,29 @@ O Desafio do Gill é uma aplicação que gerencia transações financeiras, perm
 <details>
 <summary>POST</summary>
 
+- `/transactions?id={transactionid}` - Busca uma transação pelo id fornecido na url, exemplo:
+- caso o id da transação não exista no banco de dados, ele retorna um erro 404 com a mensagem `Transação não encontrada`.
+- não coloquei no FE mas é uma otima funcionalidade para implementar.
+
+````json
+{
+	"id": 99,
+	"value": 100.5,
+	"transactiondate": "2023-02-01T15:30:00.000+00:00",
+	"personid": {
+		"id": 4,
+		"email": "hu3master.zord@hotmail.com",
+		"name": "Gabriel Fernandes",
+		"password": "gabriel"
+	},
+	"category": "saúde"
+}
+
+</details>
+
+<details>
+<summary>POST</summary>
+
 - `/transactions` - Cria uma nova transação no banco de dados, passando um json no body da requisição, exemplo:
 - caso o id da pessoa não exista no banco de dados, ele retorna um erro 404 com a mensagem `Pessoa não encontrada`.
 
@@ -114,7 +137,7 @@ O Desafio do Gill é uma aplicação que gerencia transações financeiras, perm
   "personid": 5,
   "category": "saúde"
 }
-```
+````
 
 </details>
 
