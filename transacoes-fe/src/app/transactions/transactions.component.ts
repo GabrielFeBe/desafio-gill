@@ -29,7 +29,6 @@ export class TransactionsComponent implements OnInit {
   }
   // deletando transação pelo id
   deletingTransaction(id:number){
-    console.log(id)
     this.service.deleteTransactionById(id).subscribe((req)=>{
       this.getPersonWithTransactions();
     },(err)=>{
@@ -41,7 +40,6 @@ export class TransactionsComponent implements OnInit {
   // Colocando uma transação no item que vai aparecer no meio da tela
   editingTransaction(transaction:Transaction){
     this.editOverView = transaction;
-    console.log(this.editOverView);
 
   }
   deleteAllTransactionsFromUser(){
@@ -102,7 +100,7 @@ export class TransactionsComponent implements OnInit {
           this.service.getPersonTransactions(+cookie).subscribe((person)=>{
             this.person = person;
             this.transactions = person.transactions;
-            console.log(person);
+            this.clicked = false;
           }, (err) => {
             alert('Erro ao tentar fazer a requisição da pessoa e transações tente novamente')
           },() => {})

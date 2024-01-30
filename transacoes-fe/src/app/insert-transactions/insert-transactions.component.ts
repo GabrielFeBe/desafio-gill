@@ -33,12 +33,10 @@ ngOnInit(): void {
 }
 
 insertBulkOfTransactions() {
-  console.log(this.bulkTransactionArray)
 this.service.insertBulkTransaction(this.bulkTransactionArray).subscribe((res)=>{
-  console.log(res)
   alert("lote de transações inseridas com sucesso")
 }
-,(err)=>{ console.log(err)
+,(err)=>{
 alert("falha ao efetuar o lote")
 }
 ,()=>{
@@ -58,10 +56,9 @@ addNewFields(){
 insertTransaction() {
   const transaction = new Transaction(this.value,this.transactiondate,Number(this.cookie),this.category);
   this.service.insertSingleTransaction(transaction).subscribe((res)=>{
-    console.log(res)
     alert("transação adicionada com sucesso")
   }
-  ,(err)=>{ console.log(err)
+  ,(err)=>{
   alert("falha ao efetuar transação")
   }
   ,()=>{

@@ -25,7 +25,7 @@ onLogin(){
       window.location.reload();
     } );
   },
-  (err)=>{ console.log(err)}
+  (err)=>{ alert(err.error)}
   ,()=>{
   })
 
