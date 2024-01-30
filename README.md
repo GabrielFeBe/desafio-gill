@@ -1,5 +1,23 @@
 # Projeto do Gill
 
+## Sobre o Projeto
+
+O Desafio do Gill é uma aplicação que gerencia transações financeiras, permitindo que os usuários registrem, visualizem e manipulem suas transações. O sistema é dividido em FrontEnd e BackEnd.
+
+### Tecnologias Utilizadas
+
+#### BackEnd
+
+- **Java 17**: A linguagem de programação utilizada para o desenvolvimento do BackEnd.
+- **Spring Boot**: Framework que simplifica o desenvolvimento de aplicações Java.
+- **Maven**: Ferramenta de gerenciamento de projetos utilizada para construir e gerenciar dependências.
+- **MySQL**: Sistema de gerenciamento de banco de dados relacional utilizado para armazenar dados.
+
+#### FrontEnd
+
+- **Angular**: Biblioteca JavaScript para construção de interfaces de usuário.
+- **TypeScript**: Superset do JavaScript que adiciona tipagem estática.
+
 ## BackEnd
 
 ### Configurações
