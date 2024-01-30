@@ -21,8 +21,10 @@
 
 <details>
 <summary>POST</summary>
+
 - Caso o email já exista no banco de dados, ele retorna um erro 400 com a mensagem `Email já existente no banco de dados`.
 - `/person` - Cria uma nova pessoa no banco de dados, passando um json no body da requisição, exemplo:
+
 ```json
 {
   "name": "Gabriel",
@@ -30,9 +32,11 @@
   "password": "123456"
 }
 ```
+
 </details>
 <details>
 <summary>GET</summary>
+
 - Caso passe um id que não exista no banco de dados, ele retorna um erro 404 com a mensagem `Pessoa não encontrada`.
 - `/person?id={personid}` - Retorna uma pessoa do banco de dados, passando o id da pessoa como parametro na url, tras as transações da pessoa também.
 
@@ -63,6 +67,7 @@
 
 <details>
 <summary>POST</summary>
+
 - Caso passe um email e senha que não exista no banco de dados, ele retorna um erro 404 com a mensagem `Pessoa não encontrada`.
 - Lembrando que as senhas no banco de dados não estão criptografadas, então é necessário tomar cuidado com isso, e também não estou usando jwt apenas uso o id que é retornado no front end para fazer as requisições.
 - `/person/login` - Faz o login da pessoa no sistema, passando um json no body da requisição, exemplo:
@@ -80,6 +85,7 @@
 
 <details>
 <summary>POST</summary>
+
 - `/transactions` - Cria uma nova transação no banco de dados, passando um json no body da requisição, exemplo:
 - caso o id da pessoa não exista no banco de dados, ele retorna um erro 404 com a mensagem `Pessoa não encontrada`.
 
@@ -96,6 +102,7 @@
 
 <details>
 <summary>PUT</summary>
+
 - `/transactions?id={personid}` - Atualiza uma transação no banco de dados, passando um json no body da requisição, exemplo:
 
 ```json
@@ -111,6 +118,7 @@
 
 <details>
 <summary>DELETE</summary>
+
 - `/transactions?id={transactionId}` - Deleta uma transação especifica do banco de dados, passando o id da transação como parametro na url e não retorna nada.
 
 </details>
@@ -119,6 +127,7 @@
 
 <details>
 <summary>POST</summary>
+
 - `/transactions/batch` - Cria um bulk de transações no banco de dados, passando um json no body da requisição, exemplo:
 - Caso um dos ids da pessoa não exista no banco de dados, ele retorna um erro 404 com a mensagem `Pessoa não encontrada`, Porem ele criara novas transações até se encontrar com esse id, resumindo se de um bulk de 100 itens o primeiro for defeituoso ele criara 0 transações.
 
@@ -166,6 +175,7 @@
 
 <details>
 <summary>GET</summary>
+
 - `/transactions/category?id={personid}&category={categoria}` - Esse endpoint calcula todos os gastos de uma categoria do usuarios especifico, e retorna um Double com o valor total gasto naquela categoria, exemplo:
 
 ```json
@@ -178,6 +188,7 @@
 
 <details>
 <summary>DELETE</summary>
+
 - `/transactions/all?id={personid}` - Esse endpoint deleta todas as transações de um usuario especifico e não retorna nada, exemplo:
 
 </details>
