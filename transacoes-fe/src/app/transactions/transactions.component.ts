@@ -32,7 +32,10 @@ export class TransactionsComponent implements OnInit {
     console.log(id)
     this.service.deleteTransactionById(id).subscribe((req)=>{
       this.getPersonWithTransactions();
-    },(err)=>{console.log(err)},
+    },(err)=>{
+      alert('Erro ao tentar deletar tente novamente')
+
+    },
     () => {})
   }
   // Colocando uma transação no item que vai aparecer no meio da tela
@@ -47,7 +50,7 @@ export class TransactionsComponent implements OnInit {
         alert("você deletou todas as transações")
         this.getPersonWithTransactions();
       },(err)=>{
-        console.log(err)
+        alert('Erro ao tentar deletar tudo')
       },
       ()=>{})
     } else {
@@ -65,7 +68,7 @@ export class TransactionsComponent implements OnInit {
         this.getPersonWithTransactions();
         this.editOverView = null;
       },(err)=>{
-        console.log(err)
+        alert('Erro ao tentar atualizar transação')
       },()=>{
       })
     } 
@@ -101,7 +104,7 @@ export class TransactionsComponent implements OnInit {
             this.transactions = person.transactions;
             console.log(person);
           }, (err) => {
-            console.log(err);
+            alert('Erro ao tentar fazer a requisição da pessoa e transações tente novamente')
           },() => {})
       }
     }

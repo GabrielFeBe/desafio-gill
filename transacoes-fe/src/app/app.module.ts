@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { InsertTransactionsComponent } from './insert-transactions/insert-transactions.component';
 import { CookieService } from 'ngx-cookie-service';
+import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CookieService } from 'ngx-cookie-service';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [CookieService],
+  providers: [CookieService,
+    {provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: {timezone: '+0'}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

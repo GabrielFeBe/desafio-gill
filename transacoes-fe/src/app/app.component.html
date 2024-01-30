@@ -1,10 +1,11 @@
-<header>Cabeça
+<header>
   <nav>
     <a routerLink="/register" *ngIf="!token">Registar</a>
-    <a routerLink="/login" *ngIf="!token">Login</a>
+    <a routerLink="/" *ngIf="!token">Login</a>
     <a routerLink="/insert" *ngIf="token">Colocar gastos</a>
     <a routerLink="/transactions" *ngIf="token">Gastos</a>
+    <button (click)="logOut()" *ngIf="token">LogOut</button>
   </nav>
 </header>
 <router-outlet></router-outlet>
-<footer>Pé</footer>
+<footer>Some footer</footer>

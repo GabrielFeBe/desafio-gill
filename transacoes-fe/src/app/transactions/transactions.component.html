@@ -1,38 +1,48 @@
+<h1 *ngIf="person">Transações de: {{person.name}}</h1>
 
+<div class="filter_section">
+  <input type="text" name="category" [(ngModel)]="category">
+  <button (click)="categoryFilter()">Ativar filtro de categoria</button>
+  <button (click)="cleaningFilters()" >Limpar Filtro de categoria</button>
+  <p *ngIf="clicked" class="show">Valor Total gasto nessa categoria: {{valueOfFilteredTransactions}} </p>
+</div>
 
-<input type="text" name="category" [(ngModel)]="category">
-<button (click)="categoryFilter()">Ativar filtro de categoria</button>
-<button (click)="cleaningFilters()" >Limpar Filtro de categoria</button>
-<p *ngIf="clicked">Valor Total gasto nessa categoria: {{valueOfFilteredTransactions}} </p>
+<div class="delete_whole">
 
-
-<button *ngIf="!deleteField; else deleteOf" (click)="showDeleteField()">Deletar tudo</button>
+<button *ngIf="!deleteField; else deleteOf" (click)="showDeleteField()" class="first_button">Deletar tudo</button>
 <ng-template #deleteOf>
   Escreva DELETAR para confirmar
   <input type="text" name="confirmation" [(ngModel)]="confirmation" >
-  <button (click)="deleteAllTransactionsFromUser()">Confirm</button>
-  <button (click)="showDeleteField()">Parar deleção</button>
+  <button (click)="deleteAllTransactionsFromUser()" class="confirm_button">Confirmar</button>
+  <button (click)="showDeleteField()" class="cancel_button">Cancelar</button>
 </ng-template>
-<div *ngIf="person">
-<div *ngFor="let transaction of transactions">
+</div>
+
+<main *ngIf="person" class="container_main">
+
+<div *ngFor="let transaction of transactions" class="container_transactions">
+  
   <div  *ngIf="editOverView && editOverView?.id === transaction.id; else formData">
     <input type="number" [(ngModel)]="editOverView.value" >
     <input type="text"   [(ngModel)]="editOverView.category" >
     <input type="date"   [(ngModel)]="editOverView.transactiondate" >
     <button (click)="updateTransaction()">Atualizar</button>
+  
   </div>
+
   <ng-template #formData>
       <p>
         Valor: {{transaction.value}}
       </p>
       <p>
-        Data: {{transaction.transactiondate | date: "fullDate"}}
+        Data: {{transaction.transactiondate |  date :'fullDate'  }}
       </p>
       <p>Categoria: {{transaction.category}} </p>
       <button (click)="deletingTransaction(transaction.id!)"> Excluir transação</button>
       <button (click)="editingTransaction(transaction)">Editar</button>
   </ng-template>
+  
 </div>
 
-</div>
+</main>
 

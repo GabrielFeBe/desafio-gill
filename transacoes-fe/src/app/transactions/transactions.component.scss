@@ -1,8 +1,71 @@
-.absolute{
-  min-height: 100vh;
-  min-height: 100dvh;
-  position: absolute;
-  background-color: black;
-  opacity: 0.8;
-  width: 100vw;
+.filter_section{
+width: 800px;
+height: 100px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
+align-items: center;
+  button{
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+  }
+input {
+  height: 30px;
+}
+}
+
+.container_transactions{
+  height: 150px;
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+.container_main{
+  width: 80%;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+h1{
+  text-align: center;
+}
+
+.delete_whole{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 800px;
+  height: 80px;
+  margin: 0 auto;
+  .first_button {
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+  }
+  .confirm_button{
+    padding: 10px;
+    border: 0;
+    cursor: pointer;
+    background-color: red;
+    border-radius: 10px;
+  }
+  .cancel_button{
+    padding: 10px;
+    border: 0;
+    cursor: pointer;
+    background-color: green;
+    border-radius: 10px;
+  }
+
+}
+
+.show{
+  color: red;
 }

@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import Transaction from '../insert-transactions/transaction';
+import endpoint from '../../endpoint';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransactionService {
-  private url = "http://localhost:8080/";
+  private url = endpoint +  '/';
   constructor(private http:HttpClient) { }
 
   public getPersonTransactions(id:number):Observable<any> {

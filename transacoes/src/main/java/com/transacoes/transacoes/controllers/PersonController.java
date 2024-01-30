@@ -4,6 +4,7 @@ import com.transacoes.transacoes.dto.LoginDto;
 import com.transacoes.transacoes.dto.PersonDto;
 import com.transacoes.transacoes.dto.TransactionsReturnDto;
 import com.transacoes.transacoes.entities.PersonEntity;
+import com.transacoes.transacoes.exceptions.PersonNotFound;
 import com.transacoes.transacoes.services.PersonService;
 import jakarta.websocket.server.PathParam;
 import java.util.List;
@@ -28,7 +29,7 @@ public class PersonController {
   @PostMapping
   public ResponseEntity<PersonEntity> createPerson(@RequestBody PersonEntity person) {
     if (person.getId() == null) {
-      var personRes = this.personService.createAndUpdatePerson(person);
+      var personRes = this.personService.createPerson(person);
       return ResponseEntity.status(200).body(personRes);
     } else {
 
@@ -40,18 +41,19 @@ public class PersonController {
   public ResponseEntity<PersonDto> getPersonById(@PathParam("id") Integer id) {
     Optional<PersonEntity> person = this.personService.getPersonById(id);
     if (person.isEmpty()) {
-      throw new Error("vacilo");
+      throw new PersonNotFound();
     }
     var confirmed = person.get().getTransactions();
     List<TransactionsReturnDto> transactionsReturnDto = confirmed.stream().map(transaction ->
         new TransactionsReturnDto(transaction.getId(), transaction.getValue(),
             transaction.getTransactiondate(), transaction.getCategory())).toList();
-    return person.map(personEntity -> ResponseEntity.status(200).body(new PersonDto(transactionsReturnDto, person.get().getEmail())))
+    return person.map(personEntity -> ResponseEntity.status(200)
+            .body(new PersonDto(transactionsReturnDto, person.get().getEmail() , person.get().getName())))
         .orElseGet(() -> ResponseEntity.status(500).build());
   }
 
   @PostMapping("login")
-  public ResponseEntity<Number> login(@RequestBody LoginDto login){
+  public ResponseEntity<Number> login(@RequestBody LoginDto login) {
     Integer Login = this.personService.loginPerson(login);
     return ResponseEntity.status(200).body(Login);
   }
