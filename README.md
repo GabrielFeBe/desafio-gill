@@ -207,14 +207,16 @@
 
 <details>
 <summary>Login</summary>
+
 - Tela para efetuar login de uma conta existente no banco, segue o exemplo:
-<br>
-<img src="./transacoes-fe//src/assets/login.gif" alt="login" width="500"/>
+  <br>
+  <img src="./transacoes-fe//src/assets/login.gif" alt="login" width="500"/>
 
 </details>
 
 <details>
 <summary>Transactions</summary>
+
 - Tela que mostra todas as transações de uma pessoa especifica, nessa tela é possivel manipular as transações, segue o exemplo:
 <br>
 <img src="./transacoes-fe//src/assets/manipulatingTransactions.gif" alt="login" width="500"/>
@@ -222,6 +224,7 @@
 
 <details>
 <summary>Insert</summary>
+
 - Tela que permite inserir transações podendo inserir apenas uma ou um bulk de transações, segue o exemplo:
 <br>
 <img src="./transacoes-fe//src/assets/creatingTransactions.gif" alt="login" width="500"/>
@@ -229,7 +232,9 @@
 
 <details>
 <summary>Register</summary>
+
 - Tela que permite criar uma nova conta no banco de dados, apos criar a conta você já é logado automaticamente, segue o exemplo:
+
 <br>
 <img src="./transacoes-fe//src/assets/logoutRegister.gif" alt="login" width="500"/>
 </details>
