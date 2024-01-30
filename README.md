@@ -10,6 +10,7 @@
 - o pacote do projeto é `com.transacoes.transacoes` dentro desse pacote a classe principal é a JavaTransactionsApplication.java, que é a classe que sobe o projeto.
 - Dentro da minha maquina estava usando o banco de dados Mysql, caso queira mudar tera que adicionar uma nova dependencia no pom.xml e mudar a configuração do banco de dados no application.properties.
 - Como eu não sei usar JWT em JAVA e não consegui desenvolver a tempo, estou usando apenas o id da pessoa que é retornado no front end para fazer as requisições, por isso as vezes meio que pareça desnecessário passar o id da pessoa nas requisições, mas é necessário para que o banco de dados saiba a quem pertence a transação.
+- CORS: o cors nos controllers está configurado para recener requisições de qualquer lugar, para ficar mais facil de testar, mas caso queira mudar, basta mudar o cors no controller.
 
 ### EndPoints
 
@@ -189,3 +190,35 @@
 - Para rodar o projeto basta rodar o comando `npm start` e ele ira abrir uma aba no seu navegador com o projeto rodando.
 - Dentro do arquivo `src/endpoint.ts` está a base url do backend, caso você mude a porta do backend, é necessário mudar a porta no arquivo `endpoint.ts` também.
 - O front end só funciona se o backend estiver rodando pois literalmente todas as requisições são feitas para o backend.
+- A maneira que é feito o login é muito básico eu simplesmente coloco o ID do usuario em um cookie chamado `security` e uso ele para fazer as requisiçõe, Irei mudar pra JWT assim que eu aprender a usar JWT em Java, fiquei com medo de mudar quebrar tudo e não conseguir arrumar a tempo.
+
+#### Telas
+
+<details>
+<summary>Login</summary>
+- Tela para efetuar login de uma conta existente no banco, segue o exemplo:
+<br>
+<img src="./transacoes-fe//src/assets/login.gif" alt="login" width="500"/>
+
+</details>
+
+<details>
+<summary>Transactions</summary>
+- Tela que mostra todas as transações de uma pessoa especifica, nessa tela é possivel manipular as transações, segue o exemplo:
+<br>
+<img src="./transacoes-fe//src/assets/manipulatingTransactions.gif" alt="login" width="500"/>
+</details>
+
+<details>
+<summary>Insert</summary>
+- Tela que permite inserir transações podendo inserir apenas uma ou um bulk de transações, segue o exemplo:
+<br>
+<img src="./transacoes-fe//src/assets/creatingTransactions.gif" alt="login" width="500"/>
+</details>
+
+<details>
+<summary>Register</summary>
+- Tela que permite criar uma nova conta no banco de dados, apos criar a conta você já é logado automaticamente, segue o exemplo:
+<br>
+<img src="./transacoes-fe//src/assets/logoutRegister.gif" alt="login" width="500"/>
+</details>
