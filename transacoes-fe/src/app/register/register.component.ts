@@ -10,18 +10,17 @@ import { Location } from '@angular/common';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  email= '';
+  username= '';
   password ='';
   name = '';
   constructor(private service:RegisterService, private router:Router, private cookies:CookieService, private location:Location){}
   onRegister(){
-    this.service.registerPerson({email:this.email,
+    this.service.registerPerson({username:this.username,
     password:this.password,
     name:this.name,
     }).subscribe((res)=>{
-      this.cookies.set('security',`${res.id}`, {expires:1})
-      this.router.navigate(['/transactions']).then(() =>{
-        this.location.replaceState('/transactions');
+      this.router.navigate(['/']).then(() =>{
+        this.location.replaceState('/');
         window.location.reload();
       } );
     },

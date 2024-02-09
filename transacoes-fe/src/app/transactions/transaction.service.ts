@@ -11,19 +11,19 @@ export class TransactionService {
   private url = endpoint +  '/';
   constructor(private http:HttpClient) { }
 
-  public getPersonTransactions(id:number):Observable<any> {
-    return this.http.get(this.url +"person" + `?id=${id}`);
+  public getPersonTransactions():Observable<any> {
+    return this.http.get(this.url +"person");
   }
-  public getTransactionsByCategory(id:number, category:string):Observable<number> {
-    return this.http.get<number>(this.url + "transactions/category" + `?id=${id}&category=${category}`);
-  }
-
-  public updateTransaction(transaction:Transaction, id:number){
-    return this.http.put<void>(this.url +"transactions" + `?id=${id}`, transaction);
+  public getTransactionsByCategory(category:string):Observable<number> {
+    return this.http.get<number>(this.url + "transactions/category" + `?category=${category}`);
   }
 
-  public deleteByPersonId(personid:number) {
-    return this.http.delete<void>(this.url + "transactions" + "/all" + `?personid=${personid}`)
+  public updateTransaction(transaction:Transaction){
+    return this.http.put<void>(this.url +"transactions" , transaction);
+  }
+
+  public deleteByPersonId() {
+    return this.http.delete<void>(this.url + "transactions" + "/all" )
   }
 
   public deleteTransactionById(id:number) {

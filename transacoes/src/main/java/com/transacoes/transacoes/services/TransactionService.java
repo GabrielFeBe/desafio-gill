@@ -23,30 +23,24 @@ public class TransactionService {
   @Autowired
   private PersonRepository personRepository;
 
-  public TransactionEntity createTransaction(CreateTransactionDto transaction) {
+  public TransactionEntity createTransaction(CreateTransactionDto transaction,
+      PersonEntity person) {
     TransactionEntity transactionEntity = transaction.dtoToTransaction();
 
-    Optional<PersonEntity> person = this.personRepository.findById(transaction.personid());
-    if (person.isEmpty()) {
-      throw new PersonNotFound();
-    }
-
-    transactionEntity.setPersonid(person.get());
+    transactionEntity.setPersonid(person);
     return this.transactionRepository.save(transactionEntity);
   }
 
-  public void updateTransaction(TransactionEntity transaction, Integer id) {
+  public void updateTransaction(TransactionEntity transaction, PersonEntity person) {
 
-    Optional<PersonEntity> person = this.personRepository.findById(id);
-    if (person.isEmpty()) {
-      throw new PersonNotFound();
-    }
-    transaction.setPersonid(person.get());
+    transaction.setPersonid(person);
     this.transactionRepository.save(transaction);
   }
 
-  public List<TransactionEntity> transactionBulkInsert(List<CreateTransactionDto> transactions) {
-    return transactions.stream().map(this::createTransaction
+  public List<TransactionEntity> transactionBulkInsert(List<CreateTransactionDto> transactions,
+      PersonEntity person) {
+    return transactions.stream().map(transaction ->
+        this.createTransaction(transaction, person)
     ).toList();
   }
 

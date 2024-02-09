@@ -12,7 +12,6 @@ import Transaction from '../insert-transactions/transaction';
 export class TransactionsComponent implements OnInit {
 
 
-  token: string | null = null;
   person:any;
   editOverView:null | Transaction= null;
   category: string= '';
@@ -45,7 +44,7 @@ export class TransactionsComponent implements OnInit {
   }
   deleteAllTransactionsFromUser(){
     if(this.confirmation === 'DELETAR') {
-      this.service.deleteByPersonId(Number(this.token)).subscribe(()=> {
+      this.service.deleteByPersonId().subscribe(()=> {
         alert("você deletou todas as transações")
         this.getPersonWithTransactions();
       },(err)=>{
@@ -71,7 +70,7 @@ export class TransactionsComponent implements OnInit {
   updateTransaction() {
     if(this.editOverView ) {
      
-      this.service.updateTransaction(this.editOverView , Number(this.token)).subscribe((res)=>{
+      this.service.updateTransaction(this.editOverView ).subscribe((res)=>{
         this.getPersonWithTransactions();
         this.editOverView = null;
       },(err)=>{
@@ -84,7 +83,7 @@ export class TransactionsComponent implements OnInit {
   // eu poderia ter feito o calculo em relação às transações filtradas por categoria no proprios front-end,
   // nesse filter sem mudar nada nem aumentar complexidade mas fiz no back-end pois não sabia aonde seria preferivel.
     categoryFilter() {
-        this.service.getTransactionsByCategory(Number(this.token) , this.category).subscribe((res)=>{ 
+        this.service.getTransactionsByCategory(this.category).subscribe((res)=>{ 
           this.valueOfFilteredTransactions = res;
           this.clicked = true;
         }
@@ -101,12 +100,11 @@ export class TransactionsComponent implements OnInit {
 
     getPersonWithTransactions() {
       const cookie = this.cookies.get("security");
-      this.token = cookie;
       if(!cookie) {
          this.router.navigate([""]);
          alert("Você só podera ver as transações se estiver logado!")
       }  else {
-          this.service.getPersonTransactions(+cookie).subscribe((person)=>{
+          this.service.getPersonTransactions().subscribe((person)=>{
             this.person = person;
             this.transactions = person.transactions;
             this.clicked = false;
@@ -114,7 +112,5 @@ export class TransactionsComponent implements OnInit {
             alert('Erro ao tentar fazer a requisição da pessoa e transações tente novamente')
           },() => {})
       }
-    }
-
-    
+    }    
 }

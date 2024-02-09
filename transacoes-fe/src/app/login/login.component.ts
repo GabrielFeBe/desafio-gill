@@ -11,15 +11,15 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent {
 
-email= '';
+username= '';
 password ='';
 constructor(private router:Router, private cookies:CookieService, private service: LoginService, private location:Location){
   
 }
 onLogin(){
   // O número de dias até expirar
-  this.service.login(this.email,this.password).subscribe((res)=> {
-    this.cookies.set("security", `${res}`, { expires: 1});
+  this.service.login(this.username,this.password).subscribe((res)=> {
+    this.cookies.set("security", res.token , { expires: 1});
     this.router.navigate(['/transactions']).then(() =>{
       this.location.replaceState('/transactions');
       window.location.reload();

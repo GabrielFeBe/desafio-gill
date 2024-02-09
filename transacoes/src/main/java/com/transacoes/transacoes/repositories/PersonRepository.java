@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PersonRepository extends JpaRepository<PersonEntity,Integer> {
-  Optional<PersonEntity> findByEmailAndPassword(String email, String password);
-  Optional<PersonEntity> findByEmail(String email);
+public interface PersonRepository extends JpaRepository<PersonEntity, Integer> {
+
+  Optional<PersonEntity> findByUsername(String username);
 }

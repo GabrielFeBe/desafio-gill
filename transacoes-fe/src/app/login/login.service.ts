@@ -7,11 +7,11 @@ import endpoint from '../../endpoint';
   providedIn: 'root'
 })
 export class LoginService {
-  loginUrl = endpoint + '/person/login';
+  loginUrl = endpoint + '/auth/login';
   constructor(private http:HttpClient){}
 
-  login(email:string,password:string):Observable<number>{
-    return this.http.post<number>(this.loginUrl, {email, password})
+  login(username:string,password:string):Observable<{token:string}>{
+    return this.http.post<{token:string}>(this.loginUrl, {username, password})
 
   }
 }

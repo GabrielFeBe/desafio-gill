@@ -6,11 +6,13 @@ import com.transacoes.transacoes.dto.TransactionsReturnDto;
 import com.transacoes.transacoes.entities.PersonEntity;
 import com.transacoes.transacoes.exceptions.PersonNotFound;
 import com.transacoes.transacoes.services.PersonService;
+import com.transacoes.transacoes.services.TransactionService;
 import jakarta.websocket.server.PathParam;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +28,9 @@ public class PersonController {
   @Autowired
   private PersonService personService;
 
+  @Autowired
+  private TransactionService transactionService;
+
   @PostMapping
   public ResponseEntity<PersonEntity> createPerson(@RequestBody PersonEntity person) {
     if (person.getId() == null) {
@@ -38,24 +43,15 @@ public class PersonController {
   }
 
   @GetMapping
-  public ResponseEntity<PersonDto> getPersonById(@PathParam("id") Integer id) {
-    Optional<PersonEntity> person = this.personService.getPersonById(id);
-    if (person.isEmpty()) {
-      throw new PersonNotFound();
-    }
-    var confirmed = person.get().getTransactions();
+  public ResponseEntity<PersonDto> getPersonById(@AuthenticationPrincipal PersonEntity person) {
+
+    var confirmed = this.transactionService.findTransactionByPerson(person.getId());
     List<TransactionsReturnDto> transactionsReturnDto = confirmed.stream().map(transaction ->
         new TransactionsReturnDto(transaction.getId(), transaction.getValue(),
             transaction.getTransactiondate(), transaction.getCategory())).toList();
-    return person.map(personEntity -> ResponseEntity.status(200)
-            .body(new PersonDto(transactionsReturnDto, person.get().getEmail() , person.get().getName())))
-        .orElseGet(() -> ResponseEntity.status(500).build());
-  }
-
-  @PostMapping("login")
-  public ResponseEntity<Number> login(@RequestBody LoginDto login) {
-    Integer Login = this.personService.loginPerson(login);
-    return ResponseEntity.status(200).body(Login);
+    return ResponseEntity.status(200)
+        .body(new PersonDto(transactionsReturnDto, person.getUsername(),
+            person.getName()));
   }
 
 }

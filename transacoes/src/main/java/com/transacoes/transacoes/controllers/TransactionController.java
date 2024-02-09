@@ -3,12 +3,14 @@ package com.transacoes.transacoes.controllers;
 import com.transacoes.transacoes.dto.CreateTransactionDto;
 import com.transacoes.transacoes.dto.TransactionsReturnDto;
 import com.transacoes.transacoes.dto.ValueDto;
+import com.transacoes.transacoes.entities.PersonEntity;
 import com.transacoes.transacoes.entities.TransactionEntity;
 import com.transacoes.transacoes.services.TransactionService;
 import jakarta.websocket.server.PathParam;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,33 +29,36 @@ public class TransactionController {
   private TransactionService transactionService;
 
   @GetMapping
-  public ResponseEntity<TransactionEntity> getTransactionById(@PathParam("id") Integer id) {
-    TransactionEntity transaction = this.transactionService.getById(id);
+  public ResponseEntity<TransactionEntity> getTransactionById(
+      @AuthenticationPrincipal PersonEntity person) {
+    TransactionEntity transaction = this.transactionService.getById(person.getId());
     return ResponseEntity.status(200).body(transaction);
   }
 
   @PutMapping
-  public ResponseEntity updateTransaction(@PathParam("id") Integer id,
+  public ResponseEntity updateTransaction(@AuthenticationPrincipal PersonEntity person,
       @RequestBody CreateTransactionDto transaction) {
 
-    this.transactionService.updateTransaction(transaction.dtoToTransaction(), id);
+    this.transactionService.updateTransaction(transaction.dtoToTransaction(), person);
     return ResponseEntity.status(200).build();
   }
 
   @PostMapping
   public ResponseEntity<TransactionEntity> createTransactions(
+      @AuthenticationPrincipal PersonEntity person,
       @RequestBody CreateTransactionDto transaction) {
     TransactionEntity transactionRes = this.transactionService.createTransaction(
-        transaction);
+        transaction, person);
     return ResponseEntity.status(200).body(transactionRes);
 
   }
 
   @PostMapping("batch")
   public ResponseEntity<List<TransactionsReturnDto>> createTransactions(
-      @RequestBody ValueDto<List<CreateTransactionDto>> listTransactios) {
+      @RequestBody ValueDto<List<CreateTransactionDto>> listTransactios,
+      @AuthenticationPrincipal PersonEntity person) {
     var listOfTransactionsCreated = this.transactionService.transactionBulkInsert(
-        listTransactios.value()).stream().map(transaction -> new TransactionsReturnDto(
+        listTransactios.value(), person).stream().map(transaction -> new TransactionsReturnDto(
         transaction.getId(), transaction.getValue(), transaction.getTransactiondate(),
         transaction.getCategory())).toList();
 
@@ -61,15 +66,15 @@ public class TransactionController {
   }
 
   @GetMapping("category")
-  public ResponseEntity<Double> getValueOfCategories(@PathParam("id") Integer id,
+  public ResponseEntity<Double> getValueOfCategories(@AuthenticationPrincipal PersonEntity person,
       @PathParam("category") String category) {
-    return ResponseEntity.status(200).body(this.transactionService.getValues(id, category));
+    return ResponseEntity.status(200)
+        .body(this.transactionService.getValues(person.getId(), category));
   }
 
   @DeleteMapping("all")
-  public void deleteTransactionsByPersonId(@PathParam("personid") Integer personid) {
-    System.out.println(personid);
-    this.transactionService.deleteTransactionByPerson(personid);
+  public void deleteTransactionsByPersonId(@AuthenticationPrincipal PersonEntity person) {
+    this.transactionService.deleteTransactionByPerson(person.getId());
   }
 
   @DeleteMapping
