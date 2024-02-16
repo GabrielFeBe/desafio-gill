@@ -1,6 +1,6 @@
 export default class Transaction{
   value:number;
-  transactiondate:Date | null;
+  transactiondate:Date | null | string;
   personid:number;
   category:string;
   id?:number;

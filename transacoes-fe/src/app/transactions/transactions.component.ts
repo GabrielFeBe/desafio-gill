@@ -39,6 +39,7 @@ export class TransactionsComponent implements OnInit {
   }
   // Colocando uma transação no item que vai aparecer no meio da tela
   editingTransaction(transaction:Transaction){
+    transaction.transactiondate = new Date(transaction.transactiondate as string).toISOString().substring(0, 10);
     this.editOverView = transaction;
 
   }

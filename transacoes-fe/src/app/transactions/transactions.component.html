@@ -10,7 +10,7 @@
 <div class="filter">
   <form action="">
     <input type="number" name="numer_filter" [(ngModel)]="filterNumber">
-    <button (click)="filterByNumber()">Filter</button>
+    <button (click)="filterByNumber()">Filtrar por id</button>
   </form>
 </div>
 
@@ -28,10 +28,10 @@
 
 <div *ngFor="let transaction of transactions" class="container_transactions">
   
-  <div  *ngIf="editOverView && editOverView?.id === transaction.id; else formData">
+  <div  *ngIf="editOverView && editOverView?.id === transaction.id; else formData" class="container_edit">
     <input type="number" [(ngModel)]="editOverView.value" >
     <input type="text"   [(ngModel)]="editOverView.category" >
-    <input type="date"   [(ngModel)]="editOverView.transactiondate" >
+    <input type="date"   [(ngModel)]="editOverView.transactiondate"  >
     <button (click)="updateTransaction()">Atualizar</button>
   
   </div>
@@ -44,8 +44,11 @@
         Data: {{transaction.transactiondate |  date :'fullDate'  }}
       </p>
       <p>Categoria: {{transaction.category}} </p>
-      <button (click)="deletingTransaction(transaction.id!)"> Excluir transação</button>
-      <button (click)="editingTransaction(transaction)">Editar</button>
+      <div class="button_in">
+
+        <button (click)="deletingTransaction(transaction.id!)"> Excluir transação</button>
+        <button (click)="editingTransaction(transaction)">Editar</button>
+      </div>
   </ng-template>
   
 </div>

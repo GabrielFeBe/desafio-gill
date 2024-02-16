@@ -25,7 +25,17 @@ onLogin(){
       window.location.reload();
     } );
   },
-  (err)=>{ alert(err.error)}
+  (err)=>{ 
+    if(err.status === 403) {
+      alert("Email ou senha incorrreto")
+      this.password = ''
+      this.username = ''
+    } else {
+      this.password = ''
+      this.username = ''
+      alert(err.error)
+    }
+  }
   ,()=>{
   })
 
